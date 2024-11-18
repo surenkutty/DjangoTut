@@ -1,0 +1,12 @@
+django
+djangorestframework
+pyyaml
+requests
+django-cors-headers
+PyJWT
+pytz
+sqlparse
+tzdata
+asgiref
+django-environ
+djangorestframework-simplejwt
