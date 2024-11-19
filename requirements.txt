@@ -10,3 +10,4 @@ tzdata
 asgiref
 django-environ
 djangorestframework-simplejwt
+python-dotenv
