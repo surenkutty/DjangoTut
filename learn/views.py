@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ProductSerializers
 from learn.models import Product
-
+from rest_framework import viewsets
 # Create your views here
 @api_view(['GET','POST','PUT'])
 def home(request,*args, **kwargs):
@@ -83,3 +83,14 @@ class ProductView(APIView):
         product.delete()
         return Response({"message":"Successfull deleted"},status=status.HTTP_200_OK)
         
+class ProducetViewset(viewsets.ModelViewSet):
+    serializer_class=ProductSerializers
+    queryset=Product.objects.all()
+    
+    def list(self,request):
+        search=request.GET.get('search')
+        queryset=self.queryset
+        if search:
+            queryset=queryset.filter(name__startswith=search)
+        serializer=ProductSerializers(queryset,many=True)
+        return Response({'data':serializer.data},status=status.HTTP_200_OK)
